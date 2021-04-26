@@ -186,7 +186,7 @@ m_nygh_ref <- html_session(test_nygh_url_ref, user_agent_common, timeout(5))
 m_test_orig <- html_session(test_url, user_agent_common)
 
 
-# test hrbrmstr/cfhttr
+# test hrbrmstr/cfhttr - No good, doesn't recognize it as a cf protected site
 
 # remotes::install_github("hrbrmstr/cfhttr")
 
@@ -196,3 +196,45 @@ library(cfhttr)
 cf_GET(test_nygh_url_ref)
 
 
+# test scraper API
+
+# Example url
+"http://api.scraperapi.com/?api_key=0a87f5fcc77579a81c2d66a1086b0351&url=http://httpbin.org/anything&keep_headers=true"
+
+
+# URL set up
+
+build_scraper_api_url <- function(target_url) {
+
+  res <- glue::glue("http://api.scraperapi.com/?api_key=0a87f5fcc77579a81c2d66a1086b0351&url={target_url}&render=true&keep_headers=true")
+
+  res
+}
+
+
+test_scraper_api_url <- build_scraper_api_url(test_nygh_url_ref)
+
+
+m_nygh_scraper_test <- html_session(test_scraper_api_url, user_agent_common)
+
+m_nygh_scraper_test_get
+
+
+library(RSelenium)
+
+
+driver <- rsDriver(browser = "chrome", chromever = "90.0.4430.24", port = 4446L)
+
+driver$client$open()
+
+driver$client$navigate(test_nygh_url_ref)
+
+driver$client$getAllCookies()
+
+non_api_test_url_mwtoht <- "https://mwtoht-ymca.vertoengage.com/engage/generic-open-clinic?key=9518d7a7-27c9-49a1-ac49-f523bfcbbfe4&__cf_chl_jschl_tk__=ef0c7c52bb13b0464a4231069dd3d863c524f6d8-1619377255-0-AQ9c3aW-Z_jn_TfnREbNYkQBvOQwnCI4RAYUvKxtpyztLOfrxWtjAy8WnZzEbUBc1_JDJjy0uH_BzvwNsWBsNLhBuqz_hR9n0ycT8bEsnvWcj0RQw-vgvjkSE5obqCikoSGLraoNrgmyTH0Epp50nloeqQs7pwso1Vhz1fBtBIwgphWfI-Byb32dBBpR2TKmTDya3yD-_bOUkQFxMzuVZgdwbRwO6xwI-juYdhIHz_VyOiqXLM7-rfQVO8uNYkcYQPQAbbQTAScwEHM6NdoJdFxnXcVFLbjxu8Wq6odAojV6O_AD9Rha7KqUz0C_d3wAI0M_PaOldfUcBrHaAuugl9pEHAyEtv8NWoVAVUHmQU6wuBbXG2Vsl177w_e1M8TwWR3_sZVN8fNz96CD1vq0lyWF1BrKYvsz07WUQMAwcaEyVLWOgBkapk_2_WOEoixD78sH5mI78npgUK7CsWc16hwjE43UDY2BHBRE-QMVZbxdGMXK0MKDDdDYqbJqgM155OboD-DnnVmbvSulrf3Da6cs2R7L9WDhBPRN4K1Gcczr"
+
+driver$client$close()
+driver$client$open()
+driver$client$navigate(non_api_test_url_mwtoht)
+
+test_scraper_api_url
