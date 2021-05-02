@@ -3,19 +3,13 @@ provider_data <- list(
     provider_tag = "camh",
     location_id = c("CMH"),
     key = "e9ae7abf-1c88-479b-9c1a-2e81a21da988",
-    tibble(
-      slot_type = c(
-        "Patient",           # Healthcare providers
-        "CONDITIONS",        # Mental health / substance abuse disorders
-        "INDIGENOUS",        # Indigenous (FN, Inuit, Metis)
-        "LEADERS",           # Faith leaders
-        "CONGREGATE",        # High-risk in congregate settings
-        "HOTSPOT"            # 50+ living in a hotspot
-      ),
-      slot_type_label = c(
-        "Healthcare Providers",
-        "Mental he"
-      )
+    slot_type = c(
+      "Patient",           # Healthcare providers
+      "CONDITIONS",        # Mental health / substance abuse disorders
+      "INDIGENOUS",        # Indigenous (FN, Inuit, Metis)
+      "LEADERS",           # Faith leaders
+      "CONGREGATE",        # High-risk in congregate settings
+      "HOTSPOT"            # 50+ living in a hotspot
     )
   ),
 

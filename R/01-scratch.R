@@ -238,3 +238,5 @@ driver$client$open()
 driver$client$navigate(non_api_test_url_mwtoht)
 
 test_scraper_api_url
+
+driver_phantom <- rsDriver(browser = "phantomjs", port = 4448L)
